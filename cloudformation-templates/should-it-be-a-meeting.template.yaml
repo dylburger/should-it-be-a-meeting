@@ -118,12 +118,6 @@ Resources:
                         Principal:
                             AWS: !Ref OriginAccessUser
 
-    ProdS3LoggingBucket:
-        Type: "AWS::S3::Bucket"
-        Properties:
-            BucketName: !Join ['-', [!Ref RootDomain, 'logs']]
-            AccessControl: "Private"
-
     ProdCloudfrontDistribution:
         Type: "AWS::CloudFront::Distribution"
         Properties:
@@ -148,8 +142,6 @@ Resources:
                         QueryString: "false"
                     Compress: "true"
 
-                Logging:
-                    Bucket: !GetAtt ProdS3LoggingBucket.DomainName
                 Origins:
                     - 
                         DomainName: !GetAtt ProdS3RootBucket.DomainName
