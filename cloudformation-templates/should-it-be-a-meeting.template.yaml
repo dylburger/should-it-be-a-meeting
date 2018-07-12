@@ -1,0 +1,183 @@
+Parameters:
+    RootDomain:
+        Type: String
+    StageHostname:
+        Type: String
+    ProdHostname:
+        Type: String
+    OriginAccessId:
+        Type: String
+        Default: "origin-access-identity/cloudfront/E2TJXG73224KTJ"
+    OriginAccessUser:
+        Type: String
+        Default: "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2TJXG73224KTJ"
+    CloudFrontHostedZoneId:
+        Type: String
+        Default: "Z2FDTNDATAQYW2"
+    StageCertificateArn:
+        Type: String
+    ProdCertificateArn:
+        Type: String
+
+Resources:
+    StageS3Bucket:
+        Type: "AWS::S3::Bucket"
+        Properties:
+            BucketName: !Ref StageHostname
+            AccessControl: "Private"
+            WebsiteConfiguration:
+                IndexDocument: "index.html"
+
+    StageS3BucketPolicy:
+        Type: "AWS::S3::BucketPolicy"
+        Properties:
+            Bucket: !Ref StageS3Bucket
+            PolicyDocument:
+                Statement:
+                    -
+                        Action:
+                            - "s3:GetObject"
+                        Effect: "Allow"
+                        Resource: !Join ['', ["arn:aws:s3:::", !Ref StageS3Bucket, "/*"]]
+                        Principal:
+                            AWS: !Ref OriginAccessUser
+
+    StageS3LoggingBucket:
+        Type: "AWS::S3::Bucket"
+        Properties:
+            BucketName: !Join ['-', [!Ref StageHostname, 'logs']]
+            AccessControl: "Private"
+
+    StageCloudfrontDistribution:
+        Type: "AWS::CloudFront::Distribution"
+        Properties:
+            DistributionConfig:
+                Aliases:
+                    - !Ref StageHostname
+                Enabled: "true"
+                DefaultRootObject: index.html
+                PriceClass: "PriceClass_All"
+                DefaultCacheBehavior:
+                    TargetOriginId: !Ref StageS3Bucket
+                    ViewerProtocolPolicy: "redirect-to-https"
+                    MinTTL: 0
+                    AllowedMethods:
+                        - "HEAD"
+                        - "GET"
+                    CachedMethods:
+                        - "HEAD"
+                        - "GET"
+                    ForwardedValues:
+                        QueryString: "false"
+                    Compress: "true"
+
+                Logging:
+                    Bucket: !GetAtt StageS3LoggingBucket.DomainName
+                Origins:
+                    - 
+                        DomainName: !GetAtt StageS3Bucket.DomainName
+                        Id: !Ref StageS3Bucket
+                        S3OriginConfig:
+                            OriginAccessIdentity: !Ref OriginAccessId
+                ViewerCertificate:
+                    AcmCertificateArn: !Ref StageCertificateArn
+                    SslSupportMethod: "sni-only"
+                    MinimumProtocolVersion: "TLSv1.1_2016"
+                HttpVersion: "http2"
+
+    StageDNSEntry:
+        Type: "AWS::Route53::RecordSet"
+        Properties:
+            HostedZoneName: !Join ['', [!Ref RootDomain, '.']]
+            Name: !Join ['', [!Ref StageHostname, .]]
+            Type: 'A'
+            AliasTarget:
+                HostedZoneId: !Ref CloudFrontHostedZoneId
+                DNSName: !GetAtt StageCloudfrontDistribution.DomainName
+
+
+    ProdS3RootBucket:
+        Type: "AWS::S3::Bucket"
+        Properties:
+            BucketName: !Ref RootDomain
+            AccessControl: "Private"
+            WebsiteConfiguration:
+                IndexDocument: "index.html"
+
+    ProdS3RootBucketPolicy:
+        Type: "AWS::S3::BucketPolicy"
+        Properties:
+            Bucket: !Ref ProdS3RootBucket
+            PolicyDocument:
+                Statement:
+                    -
+                        Action:
+                            - "s3:GetObject"
+                        Effect: "Allow"
+                        Resource: !Join ['', ["arn:aws:s3:::", !Ref ProdS3RootBucket, "/*"]]
+                        Principal:
+                            AWS: !Ref OriginAccessUser
+
+    ProdS3LoggingBucket:
+        Type: "AWS::S3::Bucket"
+        Properties:
+            BucketName: !Join ['-', [!Ref RootDomain, 'logs']]
+            AccessControl: "Private"
+
+    ProdCloudfrontDistribution:
+        Type: "AWS::CloudFront::Distribution"
+        Properties:
+            DistributionConfig:
+                Aliases:
+                    - !Ref ProdHostname
+                    - !Ref RootDomain
+                Enabled: "true"
+                DefaultRootObject: index.html
+                PriceClass: "PriceClass_All"
+                DefaultCacheBehavior:
+                    TargetOriginId: !Ref ProdS3RootBucket
+                    ViewerProtocolPolicy: "redirect-to-https"
+                    MinTTL: 0
+                    AllowedMethods:
+                        - "HEAD"
+                        - "GET"
+                    CachedMethods:
+                        - "HEAD"
+                        - "GET"
+                    ForwardedValues:
+                        QueryString: "false"
+                    Compress: "true"
+
+                Logging:
+                    Bucket: !GetAtt ProdS3LoggingBucket.DomainName
+                Origins:
+                    - 
+                        DomainName: !GetAtt ProdS3RootBucket.DomainName
+                        Id: !Ref ProdS3RootBucket
+                        S3OriginConfig:
+                            OriginAccessIdentity: !Ref OriginAccessId
+                ViewerCertificate:
+                    AcmCertificateArn: !Ref ProdCertificateArn
+                    SslSupportMethod: "sni-only"
+                    MinimumProtocolVersion: "TLSv1.1_2016"
+                HttpVersion: "http2"
+
+    ProdDNSEntry:
+        Type: "AWS::Route53::RecordSet"
+        Properties:
+            HostedZoneName: !Join ['', [!Ref RootDomain, '.']]
+            Name: !Join ['', [!Ref ProdHostname, .]]
+            Type: 'A'
+            AliasTarget:
+                HostedZoneId: !Ref CloudFrontHostedZoneId
+                DNSName: !GetAtt ProdCloudfrontDistribution.DomainName
+
+    ProdRootDNSEntry:
+        Type: "AWS::Route53::RecordSet"
+        Properties:
+            HostedZoneName: !Join ['', [!Ref RootDomain, '.']]
+            Name: !Join ['', [!Ref RootDomain, .]]
+            Type: 'A'
+            AliasTarget:
+                HostedZoneId: !Ref CloudFrontHostedZoneId
+                DNSName: !GetAtt ProdCloudfrontDistribution.DomainName
