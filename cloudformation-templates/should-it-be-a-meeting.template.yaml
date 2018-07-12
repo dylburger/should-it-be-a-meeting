@@ -7,7 +7,6 @@ Parameters:
         Type: String
     OriginAccessId:
         Type: String
-        Default: "origin-access-identity/cloudfront/E2TJXG73224KTJ"
     OriginAccessUser:
         Type: String
         Default: "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2TJXG73224KTJ"
