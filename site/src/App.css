@@ -1,0 +1,302 @@
+@import '~antd/dist/antd.css';
+
+html,
+body {
+    font-family: 'Roboto Mono', monospace;
+    word-wrap: break-word;
+    vertical-align: middle;
+    margin: 0px;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    position: relative;
+}
+
+.main-body {
+    flex: 1 0 auto;
+    text-align: center;
+    padding: 5% 2% 5%;
+    background-color: #f8f8f8;
+}
+
+.layout {
+    height: 100vh;
+}
+
+.main-header {
+    width: 100%;
+    border-bottom: 0.5px solid #bdbdbd;
+    position: absolute;
+    height: 60px !important;
+    line-height: 55px !important;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: #3f51b5 !important;
+    padding: 0px !important;
+    text-align: center;
+}
+
+.main-header a:hover,
+.main-header a:active,
+.main-header a:focus {
+    text-decoration: none;
+}
+
+.main-footer {
+    position: sticky;
+    text-align: center;
+    background-color: #eeeeee;
+    padding: 24px 20px !important;
+    color: #757575;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.ant-layout {
+    background: transparent;
+}
+
+p {
+    font-size: 16px;
+    color: #424242;
+    line-height: 170%;
+    font-weight: 400;
+}
+
+.left-btn {
+    margin-right: 20px;
+}
+
+.right-btn {
+    margin-left: 20px;
+}
+
+.bold {
+    font-weight: 700;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 1);
+}
+
+.layout {
+    height: 100vh;
+}
+
+.main-card {
+    border: 1px solid #eaeaea;
+    border-color: #e0e0e0 !important;
+    border-radius: 3px !important;
+    -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    margin-top: 3%;
+    padding: 4%;
+}
+
+#start-over {
+    font-size: 18px;
+    margin: 60px 0px 0px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.aws-btn:hover {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.question,
+.answer {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.question {
+    padding-top: 15%;
+}
+
+.end-node {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.end-node h2 {
+    font-size: 22px;
+}
+
+.end-node .main-card {
+    text-align: left;
+}
+
+.end-node .main-card ul {
+    color: #424242;
+}
+
+.end-node .main-card li {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 200%;
+}
+
+.emphasize {
+    font-weight: bolder;
+}
+
+#last-line-home-intro {
+    font-weight: 700 !important;
+}
+
+.gif {
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+.gif img {
+    margin: 10px 3px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 2px !important;
+    -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+}
+
+.center {
+    text-align: center;
+}
+
+.left-btn .aws-btn,
+.right-btn .aws-btn {
+    --button-default-font-size: 18px !important;
+    font-weight: 700 !important;
+}
+
+#first-question {
+    padding: 20px 5px 10px;
+}
+
+#first-question>p {
+    font-weight: 400;
+}
+
+#first-question .question {
+    padding-top: 5% !important;
+}
+
+.social-icon {
+    margin-right: 5px;
+}
+
+.social-icon-text {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.social-button {
+    margin: 10px;
+}
+
+.social-button .aws-btn {
+    --button-default-border-radius: 30px;
+    --button-raise-level: 2px;
+    --button-default-height: 5px;
+}
+
+#social-buttons-row {
+    border: 1px solid #eaeaea;
+    border-color: #e0e0e0 !important;
+    border-radius: 3px !important;
+    -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    margin-top: 3%;
+    padding: 4%;
+}
+
+.social-share-header {
+    font-size: 20px;
+    color: #424242;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.learn-more-cta-block {
+    margin: 60px 0px;
+}
+
+.learn-more-cta-block .cta-text {
+    font-weight: inherit;
+}
+
+.learn-more-cta-block p {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+#info-overview-content ul {
+    list-style-type: none;
+    -webkit-padding-start: 0px;
+    text-align: left;
+}
+
+#info-overview-content p {
+    font-size: 20px;
+}
+
+.info-overview-modal .emoji {
+    font-size: 22px;
+}
+
+.info-overview-modal {
+    margin: 0 auto;
+    min-width: 50%;
+    max-width: 95%;
+    top: 80px;
+}
+
+.info-overview-modal .ant-modal-body {
+    padding: 4%;
+}
+
+.ant-modal {
+    font-family: inherit;
+}
+
+.stat {
+    color: #3f51b5;
+}
+
+.info-overview-modal .ant-modal-footer {
+    text-align: center;
+    border-top: none;
+}
+
+.info-overview-modal .ant-modal-footer .aws-btn {
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.aws-btn {
+    --button-primary-color: #3f51b5 !important;
+    --button-primary-color-dark: #283593 !important;
+    --button-primary-color-light: #ffffff !important;
+    --button-primary-color-hover: #283593 !important;
+    --button-primary-border: none !important;
+    --button-secondary-color: #ffffff !important;
+    --button-secondary-color-dark: #1360a4 !important;
+    --button-secondary-color-light: #3f51b5 !important;
+    --button-secondary-color-hover: #EEEEEE !important;
+    --button-secondary-border: 2px solid #3f51b5 !important;
+}
+
+.aws-btn:hover,
+.aws-btn:active,
+.aws-btn:focus {
+    text-decoration: none;
+}
+
+#launch-info-overview-modal-button .aws-btn {
+    font-weight: 700;
+    font-size: 16px;
+}
