@@ -6,7 +6,7 @@ export default () => (
   <div className="main-footer">
     <div id="footer">
       <a
-        href="/assets/should-it-be-a-meeting-flowchart.pdf"
+        href="https://drive.google.com/file/d/1Eyzu-F3DKL_QfQB4HyIEOuRSlYzVnLR8/view?usp=sharing"
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => gaUserClickedLink('User clicked Download Flowchart')}>
