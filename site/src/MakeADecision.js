@@ -27,7 +27,7 @@ export default () => (
             <li>Communicate the result or next steps</li>
           </ul>
           <Gif
-            gifUrl="https://assets.ratethatmeeting.com/assets/gifs/the-office-andy-dancing.gif"
+            gifUrl="https://shoulditbeameeting.com/assets/gifs/the-office-andy-dancing.gif"
             gifAlt="That was easy"
           />
         </div>

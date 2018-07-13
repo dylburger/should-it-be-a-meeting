@@ -30,7 +30,7 @@ export default () => (
             </li>
           </ul>
           <Gif
-            gifUrl="https://assets.ratethatmeeting.com/assets/gifs/the-office-jim-excited.gif"
+            gifUrl="https://shoulditbeameeting.com/assets/gifs/the-office-jim-excited.gif"
             gifAlt="Hooray!"
           />
         </div>
