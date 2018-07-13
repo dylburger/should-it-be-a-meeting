@@ -9,7 +9,7 @@ export default () => (
   <Grid>
     <p className="answer">You might need to schedule a meeting </p>
     <Gif
-      gifUrl="https://shoulditbeameeting.com/assets/gifs/lets-have-a-meeting.gif"
+      gifUrl="/assets/gifs/lets-have-a-meeting.gif"
       gifAlt="It&rsquo;s true"
     />
     <Row
