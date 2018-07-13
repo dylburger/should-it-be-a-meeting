@@ -9,7 +9,6 @@ Parameters:
         Type: String
     OriginAccessUser:
         Type: String
-        Default: "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2TJXG73224KTJ"
     CloudFrontHostedZoneId:
         Type: String
         Default: "Z2FDTNDATAQYW2"
